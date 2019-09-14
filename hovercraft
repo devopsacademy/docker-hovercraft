@@ -1,0 +1,17 @@
+#!/usr/local/bin/bash
+
+LOG_FILE="${HOME}/.history/docker/hovercraft.log"
+project_dir="$(pwd)"
+CONTAINER_HOME="/home/hovercraft"
+
+mkdir -p $(dirname "${LOG_FILE}")
+touch "${LOG_FILE}"
+
+docker run --rm \
+           -p 8080:8080 \
+           -v "${project_dir}:${CONTAINER_HOME}/workdir" \
+           -v "${LOG_FILE}:${CONTAINER_HOME}/.bash_history" \
+           -v "${HOME}/.aws:${CONTAINER_HOME}/.aws:ro" \
+           -v "${HOME}/.ssh:${CONTAINER_HOME}/.ssh:ro" \
+           --user hovercraft:hovercraft  \
+           -i -t devoaca/hovercraft

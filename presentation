@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if [ "x" == "x$1" ]; then
+  echo 'rst file required'
+  exit 1
+fi
+
+echo '🌎 http://localhost:8080'
+
+hovercraft --port 8080 $1
